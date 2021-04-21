@@ -63,9 +63,9 @@ if (!data) {
         <title>First Page</title>
     </Head>
     <div className={styles.container}>
+        <h1>This is our students</h1>
         <Navbar />
         <br></br>
-        <h1>This is our students</h1>
        <h4> Selected Student: {student.name}:{student.major}:{student.gpa} </h4>
         <br></br>
       <div className={styles.list}>

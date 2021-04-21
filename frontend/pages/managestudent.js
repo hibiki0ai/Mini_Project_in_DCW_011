@@ -1,5 +1,7 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import Layout from '../components/layout'
 import Navbar from '../components/navbar'
 import styles from '../styles/Home.module.css'
 import useSWR, { mutate } from 'swr';
@@ -71,6 +73,7 @@ const getStudent = async (id) => {
                   <b>Major:</b> {item.major} <br />
                   <b>GPA:</b> {item.gpa}
                   <div >
+
                     <button onClick={() => getStudent(item.id)} >
                       Get
                     </button>
@@ -92,13 +95,21 @@ const getStudent = async (id) => {
 
 
     return (
+            
+            <Layout>
+              <div className={styles.header}> 
+              header
+              </div>
+              <div className={styles.header}> 
+              <Navbar />
+              </div>
             <div className={styles.container}>
-                <Navbar />
+                
             <h1>Your Student</h1>
             
             Selected Student: name:{student.name}, major:{student.major}, GPA:{student.gpa}
             <h2>Add Student</h2>
-            Name:<input type="text" onChange={(e) => setName(e.target.value)}></input>
+            Name:<input type="text" value={student.name} onChange={(e) => setName(e.target.value)}></input>
             Major:<input type="text" onChange={(e) => setMajor(e.target.value)}></input>
             GPA:<input type="number" onChange={(e) => setGpa(e.target.value)}></input>
             <br></br>
@@ -106,6 +117,7 @@ const getStudent = async (id) => {
             <h3>Our Student</h3>
             <ul>{printStudents()}</ul>
             </div>
+            </Layout>
         
         )
 
