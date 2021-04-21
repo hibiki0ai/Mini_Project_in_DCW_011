@@ -11,11 +11,12 @@ export default function Login({ token }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [status, setStatus] = useState('')
+    const[remember, setRemember] = useState(false)
 
     const login = async (req, res) => {
         try {
             let result = await axios.post(`${config.URL}/login`,
-                { username, password },
+                { username, password, remember },
                 { withCredentials: true })
             console.log('result: ', result)
             console.log('result.data:  ', result.data)
@@ -49,8 +50,25 @@ export default function Login({ token }) {
                     placeholder="password"
                     onChange={(e) => setPassword(e.target.value)} />
             </div>
-        </div>
+            
+            <div >
+        <input
+          id="remember"
+          name="remember"
+          type="checkbox"
+          onClick={rememberStatus}
+        />
+       
+      </div> 
+      <div ><label>Remember Me</label></div>
+    </div>
+       
+       
+        
     )
+    const rememberStatus = async () =>{
+        setRemember(true)
+    }
 
     const copyText = () => {
         navigator.clipboard.writeText(token)
