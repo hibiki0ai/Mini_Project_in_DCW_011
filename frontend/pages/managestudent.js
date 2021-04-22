@@ -66,26 +66,27 @@ const getStudent = async (id) => {
       const printStudents = () => {
         if (students.list && students.list.length) {
             return students.list.map((item, index) => {
-              return (
-                <div className={styles.listItem} key={index}>
-                    {index+1}
-                  <b> Name:</b> {item.name} <br />
-                  <b>Major:</b> {item.major} <br />
-                  <b>GPA:</b> {item.gpa}
-                  <div >
+              return (<Layout>
+                  <div className={styles.listItem} key={index}>
+                      {index+1}
+                    <b> Name:</b> {item.name} <br />
+                    <b>Major:</b> {item.major} <br />
+                    <b>GPA:</b> {item.gpa}
+                    <div >
 
-                    <button onClick={() => getStudent(item.id)} >
-                      Get
-                    </button>
-                    <button onClick={() => updateStudent(item.id)} >
-                      Update
-                    </button>
-                    <button onClick={() => deleteStudent(item.id)}>
-                      Delete
-                    </button>
+                      <button onClick={() => getStudent(item.id)} >
+                        Get
+                      </button>
+                      <button onClick={() => updateStudent(item.id)} >
+                        Update
+                      </button>
+                      <button onClick={() => deleteStudent(item.id)}>
+                        Delete
+                      </button>
+                    </div>
+                    <br></br>
                   </div>
-                  <br></br>
-                </div>
+                </Layout>
               );
             });
           } else {
@@ -98,24 +99,37 @@ const getStudent = async (id) => {
             
             <Layout>
               <div className={styles.header}> 
-              header
+              <h2>header</h2>
               </div>
               <div className={styles.header}> 
               <Navbar />
               </div>
-            <div className={styles.container}>
-                
-            <h1>Your Student</h1>
-            
-            Selected Student: name:{student.name}, major:{student.major}, GPA:{student.gpa}
-            <h2>Add Student</h2>
-            Name:<input type="text" value={student.name} onChange={(e) => setName(e.target.value)}></input>
-            Major:<input type="text" onChange={(e) => setMajor(e.target.value)}></input>
-            GPA:<input type="number" onChange={(e) => setGpa(e.target.value)}></input>
-            <br></br>
-            <button  onClick={() => addStudent(name, major, gpa)}>Add Student</button>
-            <h3>Our Student</h3>
-            <ul>{printStudents()}</ul>
+              Your Student
+              Name:<input type="text" value={student.name} class="test1" placeholder="Your name.." onChange={(e) => setName(e.target.value)}></input>
+            <div className={styles.header}>
+              
+              Selected Student: name:{student.name}, major:{student.major}, GPA:{student.gpa}
+
+                <div className={styles.row}>
+                  <div className={styles.leftcolumn}>
+                    <div className={styles.card}>
+                      <h3>Our Student</h3>
+                      <ul>{printStudents()}</ul>
+                    </div>
+                  </div>
+                  <div className={styles.rightcolumn}>
+                    <div className={styles.container}>
+                      <h2>Add Student</h2>
+                        Name:<input type="text" value={student.name} 
+                         onChange={(e) => setName(e.target.value)}></input>
+                        Major:<input type="text" onChange={(e) => setMajor(e.target.value)}></input>
+                        GPA:<input type="number" onChange={(e) => setGpa(e.target.value)}></input>
+                        <br></br>
+                        <button  onClick={() => addStudent(name, major, gpa)}>Add Student</button>
+                        
+                    </div>
+                  </div>
+                </div>
             </div>
             </Layout>
         
