@@ -13,7 +13,7 @@ const URL = `http://localhost/api/students`
 // const fetcher = url => axios.get(url).then(res => res.data);
 
 const admin = ({ token }) => {
-  
+    const [user, setUser] = useState({})
     const [students, setStudents] = useState({ })
     const [student, setStudent] = useState({});
     const [name, setName] = useState('');
@@ -37,15 +37,15 @@ const admin = ({ token }) => {
       };
     
 
-const getStudents = async () => {
-        let student = await axios.get(URL)
-        setStudents(student.data)
-    
-}
-const getStudent = async (id) => {
-        let student = await axios.get(`${URL}/${id}`);
-        setStudent(student.data)
-}
+      const getStudents = async () => {
+              let student = await axios.get(URL)
+              setStudents(student.data)
+          
+      }
+      const getStudent = async (id) => {
+              let student = await axios.get(`${URL}/${id}`);
+              setStudent(student.data)
+      }
       const addStudent = async (name, major, gpa) => {
         let student = await axios.post(URL, { name, major, gpa })
         console.log(student.data);
@@ -100,12 +100,13 @@ const getStudent = async (id) => {
             <Layout>
               <div className={styles.header}> 
               <h2>header</h2>
+              {user.id}
               </div>
               <div className={styles.header}> 
               <Navbar />
               </div>
               Your Student
-              Name:<input type="text" value={student.name} class="test1" placeholder="Your name.." onChange={(e) => setName(e.target.value)}></input>
+              Name:<input type="text" value={student.name} className="test1" placeholder="Your name.." onChange={(e) => setName(e.target.value)}></input>
             <div className={styles.header}>
               
               Selected Student: name:{student.name}, major:{student.major}, GPA:{student.gpa}

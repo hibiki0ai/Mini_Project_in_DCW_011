@@ -12,9 +12,8 @@ const URL  = `http://localhost/api/students`;
 const fetcher = url => axios.get(url).then(res => res.data);
 
 export default function Home({ token }) {
-  
- const {data} = useSWR(URL,fetcher);
- 
+  const [user, setUser] = useState({})
+  const {data} = useSWR(URL,fetcher);
   const [students, setStudents] = useState({ })
   const [student, setStudent] = useState({});
   const [name, setName] = useState('');
@@ -64,6 +63,7 @@ if (!data) {
     </Head>
     <div className={styles.container}>
         <h1>This is our students</h1>
+        {user.id} 
         <Navbar />
         <br></br>
        <h4> Selected Student: {student.name}:{student.major}:{student.gpa} </h4>
