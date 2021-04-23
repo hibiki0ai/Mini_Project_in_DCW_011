@@ -21,7 +21,7 @@ const Profile1 = ({ token }) => {
             const users = await axios.get(`${config.URL}/profile`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
-             console.log('user: ', users.data)
+            console.log('user: ', users.data)
             setUser(users.data)
         }
         catch (e) {

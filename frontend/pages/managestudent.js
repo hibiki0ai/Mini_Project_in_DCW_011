@@ -66,7 +66,9 @@ const admin = ({ token }) => {
       const printStudents = () => {
         if (students.list && students.list.length) {
             return students.list.map((item, index) => {
-              return (<Layout>
+              return (
+
+                    <Layout>
                   <div className={styles.listItem} key={index}>
                       {index+1}
                     <b> Name:</b> {item.name} <br />
@@ -100,7 +102,7 @@ const admin = ({ token }) => {
             <Layout>
               <div className={styles.header}> 
               <h2>header</h2>
-              {user.id}
+              {user.id} 
               </div>
               <div className={styles.header}> 
               <Navbar />
