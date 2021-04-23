@@ -69,6 +69,7 @@ const admin = ({ token }) => {
               return (
 
                     <Layout>
+                  
                   <div className={styles.listItem} key={index}>
                       {index+1}
                     <b> Name:</b> {item.name} <br />
@@ -125,8 +126,9 @@ const admin = ({ token }) => {
                       <h2>Add Student</h2>
                         Name:<input type="text" value={student.name} 
                          onChange={(e) => setName(e.target.value)}></input>
-                        Major:<input type="text" onChange={(e) => setMajor(e.target.value)}></input>
+                        
                         GPA:<input type="number" onChange={(e) => setGpa(e.target.value)}></input>
+                        <textarea value={student.major} onChange={(e) => setMajor(e.target.value)} rows="10" cols="100">{student.name}</textarea>
                         <br></br>
                         <button  onClick={() => addStudent(name, major, gpa)}>Add Student</button>
                         
