@@ -1,11 +1,12 @@
 
 .container {
-    min-height: 100vh;
+    min-height: 10vh;
     padding: 0 0.9rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    
+    
 }
 
 .content {
@@ -38,9 +39,9 @@
 
 /* Header/Blog Title */
 .header {
-  padding: 30px;
+  /*padding: 30px;*/
   text-align: center;
-  background: white;
+  background: #333;
 }
 
 .header h1 {
@@ -77,6 +78,11 @@
 }
 
 /* Right column */
+.rightcolumn2 {
+  float: left;
+  width: 25%;
+}
+
 .rightcolumn {
   float: left;
   width: 25%;

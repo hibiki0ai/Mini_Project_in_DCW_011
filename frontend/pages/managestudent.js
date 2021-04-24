@@ -5,22 +5,26 @@ import Layout from '../components/layout'
 import Navbar from '../components/navbar'
 import styles from '../styles/Home.module.css'
 import useSWR, { mutate } from 'swr';
-// import styles from '../styles/Student.module.css'
+// import styles from '../styles/Articles.module.css'
 import withAuth from '../components/withAuth'
 import config from '../config/config'
 import axios from 'axios';
-const URL = `http://localhost/api/students`
+const URL = `http://localhost/api/articles`
 // const fetcher = url => axios.get(url).then(res => res.data);
 
 const admin = ({ token }) => {
     const [user, setUser] = useState({})
-    const [students, setStudents] = useState({ })
-    const [student, setStudent] = useState({});
+    const [articles, setArticles] = useState({ })
+    const [article, setArticle] = useState({});
     const [name, setName] = useState('');
-    const [major, setMajor] = useState('');
-    const [gpa, setGpa] = useState(0);
+    const [topic, setTopic] = useState('');
+    const [treatise, setTreatise] = useState('');
+    const [score, setScore] = useState(0);
+    const [author, setAuthor] = useState('');
+    const [search, setSearch] = useState(''); 
+    c
     useEffect(() => {
-      getStudents();
+      getArticles();
       profileUser();
     }, []);
     const profileUser = async () => {
@@ -37,55 +41,66 @@ const admin = ({ token }) => {
       };
     
 
-      const getStudents = async () => {
-              let student = await axios.get(URL)
-              setStudents(student.data)
+      const getArticles = async () => {
+              let article = await axios.get(URL)
+              setArticles(article.data)
           
       }
-      const getStudent = async (id) => {
-              let student = await axios.get(`${URL}/${id}`);
-              setStudent(student.data)
+      const getArticle = async (id) => {
+              let article = await axios.get(`${URL}/${id}`);
+              setArticle(article.data)
       }
-      const addStudent = async (name, major, gpa) => {
-        let student = await axios.post(URL, { name, major, gpa })
-        console.log(student.data);
-        getStudents();
+      const addArticle = async (name,topic,treatise,score,author) => {
+        let article = await axios.post(URL, { name,topic,treatise,score,author })
+        console.log(article.data);
+        getArticles();
        
       }
-      const updateStudent = async (id) => {
-        let student = await axios.put(`${URL}/${id}`, { name, major, gpa })
-        setStudents(student.data)
-        getStudents();
+      const updateArticle = async (id,author) => {
+        if(user.username == author){
+        let article = await axios.put(`${URL}/${id}`, { name,topic,treatise,score,author })
+        setArticles(article.data)
+        getArticles();
+        }
+        else {
+          ;
+        }
       }
     
-      const deleteStudent = async (id) => {
-        let student = await axios.delete(`${URL}/${id}`, { name, major, gpa })
-        getStudents();
+      const deleteArticle = async (id,author) => {
+        if(user.username == author){
+          let article = await axios.delete(`${URL}/${id}`, { name,topic,treatise,score,author })
+          getArticles();
+        }
+        else{
+          ;
+        }
       }
-    
-      const printStudents = () => {
-        if (students.list && students.list.length) {
-            return students.list.map((item, index) => {
+      function myFunction() {
+       
+      }
+      const proo = async () =>{
+
+         
+
+      }
+
+      const printArticles = () => {
+        if (articles.list && articles.list.length) {
+           return (<div>
+
+           </div>) 
+            articles.list.map((item, index) => {
               return (
-
                     <Layout>
-                  
                   <div className={styles.listItem} key={index}>
-                      {index+1}
-                    <b> Name:</b> {item.name} <br />
-                    <b>Major:</b> {item.major} <br />
-                    <b>GPA:</b> {item.gpa}
-                    <div >
 
-                      <button onClick={() => getStudent(item.id)} >
-                        Get
-                      </button>
-                      <button onClick={() => updateStudent(item.id)} >
-                        Update
-                      </button>
-                      <button onClick={() => deleteStudent(item.id)}>
-                        Delete
-                      </button>
+                        <div><b>Name:</b>{item.name} </div>
+                        <div><b>Topic:</b> {item.topic}  <b>Score:</b> {item.score} <b>Author:</b> {item.author}</div>
+                    <div >
+                      <button onClick={() => getArticle(item.id)} >Read </button>
+                      <button onClick={() => updateArticle(item.id,item.author)}>Update</button>
+                      <button onClick={() => deleteArticle(item.id,item.author)}>Delete</button>
                     </div>
                     <br></br>
                   </div>
@@ -102,38 +117,34 @@ const admin = ({ token }) => {
             
             <Layout>
               <div className={styles.header}> 
-              <h2>header</h2>
-              {user.id} 
-              </div>
-              <div className={styles.header}> 
               <Navbar />
               </div>
-              Your Student
-              Name:<input type="text" value={student.name} className="test1" placeholder="Your name.." onChange={(e) => setName(e.target.value)}></input>
-            <div className={styles.header}>
-              
-              Selected Student: name:{student.name}, major:{student.major}, GPA:{student.gpa}
-
                 <div className={styles.row}>
-                  <div className={styles.leftcolumn}>
-                    <div className={styles.card}>
-                      <h3>Our Student</h3>
-                      <ul>{printStudents()}</ul>
-                    </div>
-                  </div>
                   <div className={styles.rightcolumn}>
                     <div className={styles.container}>
-                      <h2>Add Student</h2>
-                        Name:<input type="text" value={student.name} 
-                         onChange={(e) => setName(e.target.value)}></input>
-                        
-                        GPA:<input type="number" onChange={(e) => setGpa(e.target.value)}></input>
-                        <textarea value={student.major} onChange={(e) => setMajor(e.target.value)} rows="10" cols="100">{student.name}</textarea>
-                        <br></br>
-                        <button  onClick={() => addStudent(name, major, gpa)}>Add Student</button>
-                        
+                        Your Add
                     </div>
                   </div>
+                  <div className={styles.leftcolumn}>
+                    <div className={styles.container}>
+                        Topic:<input type="text"  onChange={(e) => setTopic(e.target.value)}></input>
+                        Name:<input type="text"  onChange={(e) => setName(e.target.value)}></input>
+                        Score:<input type="number" onChange={(e) => setScore(e.target.value)}></input>
+                        <textarea rows="10" cols="100" onChange={(e) => setTreatise(e.target.value)} >{articles.name}</textarea>
+                      
+                    </div>
+                    <button  onClick={() => addArticle(name,topic,treatise,score,user.username)}>Add Articles</button>
+                  </div>
+                </div>
+                        
+                        
+                        
+            <div className={styles.header}>
+                <div className={styles.row}>
+                    <div className={styles.card}>
+                      <h3>Our articles</h3>
+                      <ul>{printArticles()}</ul>
+                    </div>
                 </div>
             </div>
             </Layout>

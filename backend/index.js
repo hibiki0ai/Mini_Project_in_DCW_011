@@ -99,45 +99,50 @@ router.get('/alluser', (req,res) => res.json(db.users.users))
 router.get('/', (req, res, next) => {
     res.send('Respond without authentication');
 });
-let students = {
+let articles = {
     list : [
-        {id:1,name:"Ball",major:"CoE",gpa:2.73},
-        {id:2,name:"Pan",major:"CEO",gpa:3.99},
-        {id:2,name:"Cat",major:"CEO",gpa:0.99},
+        {id:1,name:"Ball",topic:"anime",treatise:"aaaaaaaaaaaaaaaaaaaaaaaaaaa",score:3.73,author:"jaku"},
+        {id:2,name:"Ball",topic:"BBB",treatise:"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",score:2.73,author:"jaga"},
+        {id:3,name:"Ball",topic:"AAA",treatise:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",score:4.00,author:"kiko"}
+        
     ]
     
 }
-router.route('/students')
+router.route('/articles')
  .get ((req,res)=>{
-     res.send(students);
+     res.send(articles);
  })
 
  .post ((req,res)=>{
-    let id = (students.list.length)?students.list[students.list.length-1].id+1:1
+    let id = (articles.list.length)?articles.list[articles.list.length-1].id+1:1
      let name = req.body.name
-     let major = req.body.major
-     let gpa = req.body.gpa
-     students.list = [...students.list,{id,name,major,gpa}]
-     res.json(students);
+     let topic = req.body.topic
+     let treatise = req.body.treatise
+     let score = req.body.score
+     let author = req.body.author
+     articles.list = [...articles.list,{id,name,topic,treatise,score,author}]
+     res.json(articles);
  })
 
- router.route('/students/:std_id')
+ router.route('/articles/:std_id')
   .get((req,res)=>{
-    let id = students.list.findIndex((item) => (item.id === +req.params.std_id))
-    res.json(students.list[id]);
+    let id = articles.list.findIndex((item) => (item.id === +req.params.std_id))
+    res.json(articles.list[id]);
   })
 
   .put((req,res)=>{
-      let id = students.list.findIndex((item) => (item.id === +req.params.std_id))
-      students.list[id].name = req.body.name
-      students.list[id].major = req.body.major
-      students.list[id].gpa = req.body.gpa
-      res.json(students)
+      let id = articles.list.findIndex((item) => (item.id === +req.params.std_id))
+      articles.list[id].name = req.body.name
+      articles.list[id].topic = req.body.topic
+      articles.list[id].treatise = req.body.treatise
+      articles.list[id].score = req.body.score
+      articles.list[id].author = req.body.author
+      res.json(articles)
   })
 
   .delete((req,res)=>{
-      students.list = students.list.filter((item) => item.id !== +req.params.std_id)
-      res.json(students);
+      articles.list = articles.list.filter((item) => item.id !== +req.params.std_id)
+      res.json(articles);
   })
 
 

@@ -8,47 +8,50 @@ import withAuth from '../components/withAuth'
 import config from '../config/config'
 import useSWR, { mutate } from 'swr';
 
-const URL  = `http://localhost/api/students`;
+const URL  = `http://localhost/api/articles`;
 const fetcher = url => axios.get(url).then(res => res.data);
 
 export default function Home({ token }) {
   const [user, setUser] = useState({})
   const {data} = useSWR(URL,fetcher);
-  const [students, setStudents] = useState({ })
-  const [student, setStudent] = useState({});
+  const [articles, setArticles] = useState({ })
+  const [article, setArticle] = useState({});
   const [name, setName] = useState('');
-  const [major, setMajor] = useState('');
-  const [gpa, setGpa] = useState(0);
+  const [topic, setTopic] = useState('');
+  const [treatise, setTreatise] = useState('');
+  const [score, setScore] = useState(0);
+  const [author, setAuthor] = useState('');
 
 if (!data) {
       console.log(data);
       return <div><h1>Loading...</h1></div>
  }
- const getStudent = async(id) =>{
-  let student = await axios.get(`${URL}/${id}`);
-  setStudent(student.data)
+ const getArticle = async(id) =>{
+  let article = await axios.get(`${URL}/${id}`);
+  setArticle(article.data)
   mutate(URL);
 
  }
- const getStudents = async () =>{
-  let student = await axios.get(`${URL}`);
+ const getArticles = async () =>{
+  let article = await axios.get(`${URL}`);
   mutate(URL);
 
  }
- const printStudents = () => {
+ const printArticles = () => {
   if (data.list && data.list.length) {
     return data.list.map((item, index) => {
       return (
-        <div className={styles.listItem} key={index}>
-          <div><b>Name:</b> {item.name}</div>
-          <div> <b>Major:</b> {item.major} </div>
-          <div><b>GPA:</b> {item.gpa}</div>
-          
-          <div>
-          <button onClick={() => getStudent(item.id)}>Get</button>
-          </div>
-          <br></br>
-        </div>
+                <Layout>
+                  <div className={styles.listItem} key={index}>
+
+                        <div><b>Name:</b>{item.name} </div>
+                        <div><b>Topic:</b> {item.topic}  <b>Score:</b> {item.score} <b>Author:</b> {item.author}</div>
+                    <div >
+                      <button onClick={() => getArticle(item.id)} >Read </button>
+                    </div>
+                    <br></br>
+                  </div>
+                </Layout>
       );
     });
   } else {
@@ -58,21 +61,36 @@ if (!data) {
 
   return (
     <Layout>
-    <Head>
-        <title>First Page</title>
-    </Head>
-    <div className={styles.container}>
-        <h1>This is our students</h1>
-        {user.id} 
-        <Navbar />
-        <br></br>
-       <h4> Selected Student: {student.name}:{student.major}:{student.gpa} </h4>
-        <br></br>
-      <div className={styles.list}>
-        {printStudents()}
-      </div>
-    </div>
-</Layout>
+              <div className={styles.header}> 
+              <Navbar />
+              </div>
+                <div className={styles.row}>
+                  <div className={styles.rightcolumn}>
+                    <div className={styles.container}>
+                        Your Ra
+                    </div>
+                  </div>
+                  <div className={styles.leftcolumn}>
+                    <div className={styles.container}>
+                        Topic:<input type="text" value={article.topic} className="test1" placeholder="Your Read"></input>
+                        Title :<input type="text" value={article.name} className="test1" placeholder="Your Read" ></input>
+                        author:<input type="text" value={article.author} placeholder="Your Read" ></input>
+                        <textarea rows="10" cols="100" value={article.treatise} placeholder="Your Read"></textarea>
+                    </div>
+                  </div>
+                </div>
+                 
+                        
+                        
+            <div className={styles.header}>
+                <div className={styles.row}>
+                    <div className={styles.card}>
+                      <h3>Our articles</h3>
+                      <ul>{printArticles()}</ul>
+                    </div>
+                </div>
+            </div>
+            </Layout>
   )
 }
 
