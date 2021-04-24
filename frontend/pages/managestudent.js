@@ -80,9 +80,7 @@ const admin = ({ token }) => {
       const printArticles = () => {
         if (articles.list && articles.list.length) {
           return (
-            <div> <center><div>Search:<input type="text"  onChange={(e) => setSearch(e.target.value)}></input>
-                  </div></center>
-              <div>
+              <div> 
                 {articles.list.filter((item)=>{
                   if (search ==""){
                     return ({item});
@@ -110,13 +108,13 @@ const admin = ({ token }) => {
                   )
                 })} 
               </div>
-            </div>
+            
           )
         }
         else{
               return <p>Loading...</p>;
           }
-          }
+      };
 
     return (
             
@@ -127,20 +125,25 @@ const admin = ({ token }) => {
                 <div className={styles.row}>
                   <div className={styles.rightcolumn}>
                     <div className={styles.container}>
-                        Your Add
+                        <b>Your Add </b>
+                        <center><div><b>Search : </b><input type="text"   onChange={(e) => setSearch(e.target.value)}></input>
+                        </div></center>
+                        <div className={styles.card}>
+                          <h3>Our articles</h3>
+                          <ul>{printArticles()}</ul>
+                        </div>
                     </div>
-                    <center><div>Search:<input type="text"  onChange={(e) => setSearch(e.target.value)}></input>
-                  </div></center>
+                    
                   </div>
                   <div className={styles.leftcolumn}>
                     <div className={styles.container}>
-                        Topic:<input type="text"  onChange={(e) => setTopic(e.target.value)}></input>
-                        Name:<input type="text"  onChange={(e) => setName(e.target.value)}></input>
-                        Score:<input type="number" onChange={(e) => setScore(e.target.value)}></input>
-                        <textarea rows="10" cols="100" onChange={(e) => setTreatise(e.target.value)} >{articles.name}</textarea>
+                        <b>Topic :</b><input type="text"  onChange={(e) => setTopic(e.target.value)}></input>
+                        <b>Name :</b><input type="text"  onChange={(e) => setName(e.target.value)}></input>
+                        <b>Score :</b><input type="number" onChange={(e) => setScore(e.target.value)}></input>
+                        <b>Treatise :</b><textarea rows="10" cols="100" onChange={(e) => setTreatise(e.target.value)} >{articles.name}</textarea>
                       
                     </div>
-                    <button  onClick={() => addArticle(name,topic,treatise,score,user.username)}>Add Articles</button>
+                     <center><button  onClick={() => addArticle(name,topic,treatise,score,user.username)}>Add Articles</button></center>
                   </div>
                 </div>
                         
@@ -148,10 +151,7 @@ const admin = ({ token }) => {
                         
             <div className={styles.header}>
                 <div className={styles.row}>
-                    <div className={styles.card}>
-                      <h3>Our articles</h3>
-                      <ul>{printArticles()}</ul>
-                    </div>
+                   
                 </div>
             </div>
             </Layout>

@@ -21,6 +21,7 @@ export default function Home({ token }) {
   const [treatise, setTreatise] = useState('');
   const [score, setScore] = useState(0);
   const [author, setAuthor] = useState('');
+  const [search, setSearch] = useState(''); 
 
 if (!data) {
       console.log(data);
@@ -39,25 +40,45 @@ if (!data) {
  }
  const printArticles = () => {
   if (data.list && data.list.length) {
-    return data.list.map((item, index) => {
-      return (
-                <Layout>
-                  <div className={styles.listItem} key={index}>
-
-                        <div><b>Name:</b>{item.name} </div>
-                        <div><b>Topic:</b> {item.topic}  <b>Score:</b> {item.score} <b>Author:</b> {item.author}</div>
-                    <div >
-                      <button onClick={() => getArticle(item.id)} >Read </button>
-                    </div>
-                    <br></br>
+    return (
+      
+        <div>
+          {data.list.filter((item)=>{
+            if (search ==""){
+              return ({item});
+            }else if (item.name.toLowerCase().includes(search.toLowerCase())){
+              return item.name;
+            }else if (item.topic.toLowerCase().includes(search.toLowerCase())){
+              return item.topic;
+            }else if (item.author.toLowerCase().includes(search.toLowerCase())){
+              return item.author;
+            }
+          }).map((item, index) => {
+            return (
+              <Layout>
+                <div className={styles.listItem} key={index}>
+                  <div><b>Name:</b>{item.name} </div>
+                  <div><b>Topic:</b> {item.topic}  <b>Score:</b> {item.score} <b>Author:</b> {item.author}</div>
+                  <div>
+                    <button onClick={() => getArticle(item.id)} >Read </button>
+                    <button onClick={() => updateArticle(item.id,item.author)}>Update</button>
+                    <button onClick={() => deleteArticle(item.id,item.author)}>Delete</button>
                   </div>
-                </Layout>
-      );
-    });
-  } else {
-    return <p>Loading...</p>;
+                  <br></br>
+                </div>
+              </Layout>
+            )
+          })} 
+        </div>
+      
+    )
   }
+  else{
+        return <p>Loading...</p>;
+    }
 };
+
+
 
   return (
     <Layout>
@@ -67,15 +88,21 @@ if (!data) {
                 <div className={styles.row}>
                   <div className={styles.rightcolumn}>
                     <div className={styles.container}>
-                        Your Ra
-                    </div>
+                        <b>Your Read </b>
+                       <center><div><b>Search : </b><input type="text"  onChange={(e) => setSearch(e.target.value)}></input>
+                       </div></center> 
+                      <div className={styles.card}>
+                      <h3>Our articles</h3>
+                      <ul>{printArticles()}</ul>
+                    </div> 
                   </div>
+                </div>
                   <div className={styles.leftcolumn}>
                     <div className={styles.container}>
-                        Topic:<input type="text" value={article.topic} className="test1" placeholder="Your Read"></input>
-                        Title :<input type="text" value={article.name} className="test1" placeholder="Your Read" ></input>
-                        author:<input type="text" value={article.author} placeholder="Your Read" ></input>
-                        <textarea rows="10" cols="100" value={article.treatise} placeholder="Your Read"></textarea>
+                    <b>Topic :</b><input type="text" value={article.topic} className="test1" placeholder="Your Read"></input>
+                      <b>Title :</b><input type="text" value={article.name} className="test1" placeholder="Your Read" ></input>
+                       <b>Author :</b> <input type="text" value={article.author} placeholder="Your Read" ></input>
+                        <b>Treatise :</b><textarea rows="10" cols="100" value={article.treatise} placeholder="Your Read"></textarea>
                     </div>
                   </div>
                 </div>
@@ -84,10 +111,7 @@ if (!data) {
                         
             <div className={styles.header}>
                 <div className={styles.row}>
-                    <div className={styles.card}>
-                      <h3>Our articles</h3>
-                      <ul>{printArticles()}</ul>
-                    </div>
+                    
                 </div>
             </div>
             </Layout>
