@@ -22,7 +22,6 @@ const admin = ({ token }) => {
     const [score, setScore] = useState(0);
     const [author, setAuthor] = useState('');
     const [search, setSearch] = useState(''); 
-    c
     useEffect(() => {
       getArticles();
       profileUser();
@@ -76,42 +75,48 @@ const admin = ({ token }) => {
           ;
         }
       }
-      function myFunction() {
-       
-      }
-      const proo = async () =>{
-
-         
-
-      }
+    
 
       const printArticles = () => {
         if (articles.list && articles.list.length) {
-           return (<div>
-
-           </div>) 
-            articles.list.map((item, index) => {
-              return (
+          return (
+            <div> <center><div>Search:<input type="text"  onChange={(e) => setSearch(e.target.value)}></input>
+                  </div></center>
+              <div>
+                {articles.list.filter((item)=>{
+                  if (search ==""){
+                    return ({item});
+                  }else if (item.name.toLowerCase().includes(search.toLowerCase())){
+                    return item.name;
+                  }else if (item.topic.toLowerCase().includes(search.toLowerCase())){
+                    return item.topic;
+                  }else if (item.author.toLowerCase().includes(search.toLowerCase())){
+                    return item.author;
+              }
+                }).map((item, index) => {
+                  return (
                     <Layout>
-                  <div className={styles.listItem} key={index}>
-
+                      <div className={styles.listItem} key={index}>
                         <div><b>Name:</b>{item.name} </div>
                         <div><b>Topic:</b> {item.topic}  <b>Score:</b> {item.score} <b>Author:</b> {item.author}</div>
-                    <div >
-                      <button onClick={() => getArticle(item.id)} >Read </button>
-                      <button onClick={() => updateArticle(item.id,item.author)}>Update</button>
-                      <button onClick={() => deleteArticle(item.id,item.author)}>Delete</button>
-                    </div>
-                    <br></br>
-                  </div>
-                </Layout>
-              );
-            });
-          } else {
-            return <p>Loading...</p>;
+                        <div>
+                          <button onClick={() => getArticle(item.id)} >Read </button>
+                          <button onClick={() => updateArticle(item.id,item.author)}>Update</button>
+                          <button onClick={() => deleteArticle(item.id,item.author)}>Delete</button>
+                        </div>
+                        <br></br>
+                      </div>
+                    </Layout>
+                  )
+                })} 
+              </div>
+            </div>
+          )
+        }
+        else{
+              return <p>Loading...</p>;
           }
-        };
-
+          }
 
     return (
             
@@ -124,6 +129,8 @@ const admin = ({ token }) => {
                     <div className={styles.container}>
                         Your Add
                     </div>
+                    <center><div>Search:<input type="text"  onChange={(e) => setSearch(e.target.value)}></input>
+                  </div></center>
                   </div>
                   <div className={styles.leftcolumn}>
                     <div className={styles.container}>
