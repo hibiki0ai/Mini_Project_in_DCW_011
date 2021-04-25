@@ -101,9 +101,12 @@ router.get('/', (req, res, next) => {
 });
 let articles = {
     list : [
-        {id:1,name:"Ball",topic:"anime",treatise:"aaaaaaaaaaaaaaaaaaaaaaaaaaa",score:3.73,author:"jaku"},
-        {id:2,name:"Ball",topic:"BBB",treatise:"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",score:2.73,author:"jaga"},
-        {id:3,name:"Ball",topic:"AAA",treatise:"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",score:4.00,author:"kiko"}
+        {id:1,name:"anime",topic:"Ijiranaide, Nagatoro-san",treatise:"High schooler Hayase Nagatoro loves to spend her free time doing one thing, and that is to bully her Senpai! After Nagatoro and her friends stumble upon the aspiring artist's drawings, they find enjoyment in mercilessly bullying the timid Senpai. Nagatoro resolves to continue her cruel game and visits him daily so that she can force Senpai into doing whatever interests her at the time, especially if it makes him uncomfortable."
+        ,score:3.73,author:"jaku"},
+        {id:2,name:"anime",topic:"Kumo Desu ga, Nani ka?",treatise:"The day is as normal as it can be in high school as the students peacefully go about their everyday activities until an unprecedented catastrophe strikes the school, killing every person in its wake. Guided by what seems to be a miracle, a handful of students are fortunate enough to be reincarnated into another world as nobles, princes, and other kinds of people with prestigious backgrounds."
+        ,score:2.73,author:"MAL_Rewrite"},
+        {id:3,name:"movie ",topic:"The Shawshank Redemption",treatise:"Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency."
+        ,score:4.00,author:"kiko"}
         
     ]
     

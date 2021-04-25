@@ -93,8 +93,8 @@ const admin = ({ token }) => {
                   return (
                     <Layout>
                       <div className={styles.listItem} key={index}>
-                        <div><b>Name:</b>{item.name} </div>
-                        <div><b>Topic:</b> {item.topic}  <b>Score:</b> {item.score} <b>Author:</b> {item.author}</div>
+                        <div> <b>Topic:</b> {item.topic}</div>
+                        <div><b>Title:</b>{item.name} <b>Author:</b> {item.author}</div>
                         <div>
                           <button onClick={() => getArticle(item.id)} >Read </button>
                           <button onClick={() => updateArticle(item.id,item.author)}>Update</button>
@@ -124,7 +124,7 @@ const admin = ({ token }) => {
                 <div className={styles.row}>
                   <div className={styles.rightcolumn}>
                     <div className={styles.container}>
-                        <b>Your Add </b>
+                        <h2><b>Your Add </b> </h2>
                         <center><div><b>Search : </b><input type="text"  placeholder="Search..." onChange={(e) => setSearch(e.target.value)}></input>
                         </div></center>
                         <div className={styles.card}>
@@ -136,13 +136,17 @@ const admin = ({ token }) => {
                   </div>
                   <div className={styles.leftcolumn}>
                     <div className={styles.container}>
-                        <b>Topic :</b><input type="text"  onChange={(e) => setTopic(e.target.value)}></input>
-                        <b>Name :</b><input type="text"  onChange={(e) => setName(e.target.value)}></input>
-                        <b>Score :</b><input type="number" onChange={(e) => setScore(e.target.value)}></input>
-                        <b>Treatise :</b><textarea rows="10" cols="100" onChange={(e) => setTreatise(e.target.value)} >{articles.name}</textarea>
-                      
+                        <b>Topic :</b><input type="text"  onChange={(e) => setTopic(e.target.value)} placeholder="Your Add Topic"></input>
+                        <b>Title :</b><input type="text"  onChange={(e) => setName(e.target.value)} placeholder="Your Add Title"></input>
+                        <b>Treatise :</b><textarea rows="10" cols="100" onChange={(e) => setTreatise(e.target.value)} placeholder="Your Add Treatise" ></textarea>
+<center><button  onClick={() => addArticle(name,topic,treatise,score,user.username)}>Add Articles</button></center>
+                        <h2>Your Read</h2>
+                        <b>Topic :</b><input type="text" value={article.topic} className="test1" placeholder="Your Read Topic"></input>
+                        <b>Title :</b><input type="text" value={article.name} className="test1" placeholder="Your Read Title" ></input>
+                        <b>Author :</b> <input type="text" value={article.author} placeholder="Your Read Author" ></input>
+                        <b>Treatise :</b><textarea rows="10" cols="100" value={article.treatise} placeholder="Your Read Treatise"></textarea>
                     </div>
-                     <center><button  onClick={() => addArticle(name,topic,treatise,score,user.username)}>Add Articles</button></center>
+                     
                   </div>
                 </div>
                         

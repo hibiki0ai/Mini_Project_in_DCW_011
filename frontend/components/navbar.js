@@ -4,7 +4,6 @@ const Navbar = () => (
     <div className={styles.topnav}>
                   <div className={styles.leftcolumn3}>
                         <Link href="/"><a> Home </a></Link> 
-            
                         <Link href="/managestudent"><a> Add Articles </a></Link>
                         <Link href="/profile"><a> Profile </a></Link> 
                   </div>

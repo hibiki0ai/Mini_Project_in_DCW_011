@@ -57,8 +57,8 @@ if (!data) {
             return (
               <Layout>
                 <div className={styles.listItem} key={index}>
-                  <div><b>Name:</b>{item.name} </div>
-                  <div><b>Topic:</b> {item.topic}  <b>Score:</b> {item.score} <b>Author:</b> {item.author}</div>
+                  <div><b>Topic:</b> {item.topic} </div>
+                  <div><b>Title:</b>{item.name}  <b>Author:</b> {item.author}</div>
                   <div>
                     <button onClick={() => getArticle(item.id)} >Read </button>
                     
@@ -87,7 +87,7 @@ if (!data) {
                 <div className={styles.row}>
                   <div className={styles.rightcolumn}>
                     <div className={styles.container}>
-                        <b>Your Read </b>
+                        <h2><b>Your Read </b> </h2>
                        <center><div><b>Search : </b><input type="text" placeholder="Search..." onChange={(e) => setSearch(e.target.value)}></input>
                        </div></center> 
                       <div className={styles.card}>
@@ -98,10 +98,10 @@ if (!data) {
                 </div>
                   <div className={styles.leftcolumn}>
                     <div className={styles.container}>
-                    <b>Topic :</b><input type="text" value={article.topic} className="test1" placeholder="Your Read"></input>
-                      <b>Title :</b><input type="text" value={article.name} className="test1" placeholder="Your Read" ></input>
-                       <b>Author :</b> <input type="text" value={article.author} placeholder="Your Read" ></input>
-                        <b>Treatise :</b><textarea rows="10" cols="100" value={article.treatise} placeholder="Your Read"></textarea>
+                    <b>Topic :</b><input type="text" value={article.topic} className="test1" placeholder="Your Read Topic"></input>
+                      <b>Title :</b><input type="text" value={article.name} className="test1" placeholder="Your Read Title" ></input>
+                       <b>Author :</b> <input type="text" value={article.author} placeholder="Your Read Author" ></input>
+                        <b>Treatise :</b><textarea rows="10" cols="100" value={article.treatise} placeholder="Your Read Treatise"></textarea>
                     </div>
                   </div>
                 </div>
