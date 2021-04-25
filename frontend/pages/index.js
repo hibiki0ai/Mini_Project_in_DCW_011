@@ -61,8 +61,7 @@ if (!data) {
                   <div><b>Topic:</b> {item.topic}  <b>Score:</b> {item.score} <b>Author:</b> {item.author}</div>
                   <div>
                     <button onClick={() => getArticle(item.id)} >Read </button>
-                    <button onClick={() => updateArticle(item.id,item.author)}>Update</button>
-                    <button onClick={() => deleteArticle(item.id,item.author)}>Delete</button>
+                    
                   </div>
                   <br></br>
                 </div>
@@ -89,7 +88,7 @@ if (!data) {
                   <div className={styles.rightcolumn}>
                     <div className={styles.container}>
                         <b>Your Read </b>
-                       <center><div><b>Search : </b><input type="text"  onChange={(e) => setSearch(e.target.value)}></input>
+                       <center><div><b>Search : </b><input type="text" placeholder="Search..." onChange={(e) => setSearch(e.target.value)}></input>
                        </div></center> 
                       <div className={styles.card}>
                       <h3>Our articles</h3>

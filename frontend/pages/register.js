@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import Head from 'next/head'
 import Layout from '../components/layout'
@@ -89,6 +88,7 @@ export default function Register({ token }) {
                 <br />
             Status:  {status}
                 <br /><br />
+                
                 <div className={styles.content}>
                     {registerForm()}
                 </div>

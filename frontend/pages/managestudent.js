@@ -125,7 +125,7 @@ const admin = ({ token }) => {
                   <div className={styles.rightcolumn}>
                     <div className={styles.container}>
                         <b>Your Add </b>
-                        <center><div><b>Search : </b><input type="text"   onChange={(e) => setSearch(e.target.value)}></input>
+                        <center><div><b>Search : </b><input type="text"  placeholder="Search..." onChange={(e) => setSearch(e.target.value)}></input>
                         </div></center>
                         <div className={styles.card}>
                           <h3>Our articles</h3>

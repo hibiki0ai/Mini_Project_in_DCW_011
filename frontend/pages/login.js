@@ -12,6 +12,7 @@ export default function Login({ token }) {
     const [password, setPassword] = useState('')
     const [status, setStatus] = useState('')
     const[remember, setRemember] = useState(false)
+    const [email, setEmail] = useState('')
 
     const login = async (req, res) => {
         try {
@@ -74,27 +75,110 @@ export default function Login({ token }) {
         navigator.clipboard.writeText(token)
     }
 
+    const profileUser = async () => {
+        console.log('token: ', token)
+        const users = await axios.get(`${config.URL}/profile`, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        console.log('user: ', users.data)
+    }
+
+    const register = async (req, res) => {
+        try {
+            let result = await axios.post(`${config.URL}/register`,
+                { username, email, password })
+            console.log('result: ', result)
+            console.log('result.data:  ', result.data)
+            console.log('token:  ', token)
+            setStatus(result.data.message)
+        }
+        catch (e) {
+            console.log(e)
+        }
+
+    }
+
+    const registerForm = () => (
+        <div className={styles.gridContainer}>
+            <div>
+                Username:
+            </div>
+            <div>
+                <input type="text"
+                    name="username"
+                    placeholder="username"
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+            </div>
+            <div>
+                Email:
+            </div>
+            <div>
+                <input type="email"
+                    name="email"
+                    placeholder="email"
+                    onChange={(e) => setEmail(e.target.value)} />
+            </div>
+            <div>
+                Password:
+            </div>
+            <div>
+                <input type="password"
+                    name="password"
+                    placeholder="password"
+                    onChange={(e) => setPassword(e.target.value)} />
+            </div>
+
+        </div>
+    )
+
     return (
         <Layout>
             <Head>
-                <title>Login</title>
+                <title>Login & Register</title>
             </Head>
-            <div className={styles.container}>
-                <Navbar />
-                <h1>Login</h1>
-                <div><b>Token:</b> {token.substring(0, 15)}...
-                <button onClick={copyText}> Copy token </button>
+            
+                
+                <div className={styles.header}> 
+                    <Navbar />
                 </div>
-                <br/>
-                <div>
-                    Status:  {status}
-                </div>
-                <br />
-                {loginForm()}
-                <div>
-                    <button onClick={login}>Login</button>
-                </div>
-            </div>
+                <div className={styles.row}>
+                    <center>
+                        <div className={styles.container}><b>Token:</b> {token.substring(0, 15)}...
+                            
+                            <button onClick={copyText}> Copy token </button>
+                        </div>
+                        <br/>
+                        <div>
+                            Status:  {status}
+                        </div>
+                    </center> 
+                </div>    
+                <div className={styles.row}> 
+                    <div className={styles.rightcolumn4}>
+                        <div className={styles.container}>
+                            <h1>Login</h1>
+                            <br />
+                            {loginForm()}
+                            <div>
+                                <button onClick={login}>Login</button>
+                            </div>
+                        </div>    
+                    </div>
+                    <div className={styles.leftcolumn4}>
+                        <div className={styles.container}>
+                        <h1>Register</h1>
+                                <div className={styles.content}>
+                                    {registerForm()}
+                                </div>
+
+                                <div>
+                                    <button onClick={register}>Register</button>
+                                </div> 
+                        </div>
+                    </div>
+                </div>     
+            
         </Layout>
     )
 }
