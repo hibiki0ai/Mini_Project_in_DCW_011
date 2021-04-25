@@ -11,7 +11,6 @@ import config from '../config/config'
 import axios from 'axios';
 const URL = `http://localhost/api/articles`
 // const fetcher = url => axios.get(url).then(res => res.data);
-
 const admin = ({ token }) => {
     const [user, setUser] = useState({})
     const [articles, setArticles] = useState({ })
@@ -76,7 +75,6 @@ const admin = ({ token }) => {
         }
       }
     
-
       const printArticles = () => {
         if (articles.list && articles.list.length) {
           return (
@@ -122,6 +120,7 @@ const admin = ({ token }) => {
               <div className={styles.header}> 
               <Navbar />
               </div>
+              
                 <div className={styles.row}>
                   <div className={styles.rightcolumn}>
                     <div className={styles.container}>
