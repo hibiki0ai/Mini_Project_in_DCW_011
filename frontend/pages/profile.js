@@ -38,16 +38,17 @@ const Profile1 = ({ token }) => {
             <div className={styles.header}> 
               <Navbar />
               </div>
+              <center>
             <div className={styles.container}>
                 <h1>User profile</h1>
-                <div>
+                <div className={styles.listItem}>
                     <div><b>Username : </b> {user.username}</div>
                     <div><b>ID       : </b> {user.id}</div>
                     <div><b>Email    : </b> {user.email}</div>
                     <b>Token:</b> {token.substring(0, 15)}... <br /><br />
                     
                 </div>
-            </div>
+            </div></center>
         </Layout>
     )
 }

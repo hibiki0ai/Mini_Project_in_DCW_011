@@ -89,11 +89,6 @@ router.post('/register',
             res.status(422).json({ message: "Cannot register" })
         }
     })
-    router.get('/foo',
-    passport.authenticate('jwt', { session: false }),
-    (req, res, next) => {
-        return res.json({ message: 'foo' })
-    });
 router.get('/alluser', (req,res) => res.json(db.users.users))
 
 router.get('/', (req, res, next) => {
